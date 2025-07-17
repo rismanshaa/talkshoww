@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talkshow Live Simulator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('background.jpg') center/cover no-repeat fixed;
+      color: white;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 1rem;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .header {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .comments {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.5rem;
+      border-radius: 8px;
+      height: 300px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      background-color: #222;
+      color: white;
+      border: 1px solid #fff;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+    }
+    .slider {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="header" id="sliderText">Judul: Talkshow Seru Bareng Risma</div>
+
+    <div class="slider-buttons buttons">
+      <button class="btn" onclick="changeSlide(0)">J</button>
+      <button class="btn" onclick="changeSlide(1)">1</button>
+      <button class="btn" onclick="changeSlide(2)">2</button>
+      <button class="btn" onclick="changeSlide(3)">3</button>
+    </div>
+
+    <div class="comments" id="commentBox">
+      <div><i>Penonton akan komentar di sini...</i></div>
+    </div>
+
+    <div class="buttons">
+      <button class="btn" onclick="showComments(0)">C1</button>
+      <button class="btn" onclick="showComments(1)">C2</button>
+      <button class="btn" onclick="showComments(2)">C3</button>
+      <button class="btn" onclick="playSound(0)">🎵</button>
+      <button class="btn" onclick="playSound(1)">🎶</button>
+      <button class="btn" onclick="playSound(2)">🔊</button>
+    </div>
+  </div>
+
+  <audio id="sound1" src="sound1.mp3"></audio>
+  <audio id="sound2" src="sound2.mp3"></audio>
+  <audio id="sound3" src="sound3.mp3"></audio>
+
+  <script>
+    const slides = [
+      "Judul: Talkshow Seru Bareng Risma",
+      "Pertanyaan 1: Apa tantangan terbesar saat siaran live?",
+      "Pertanyaan 2: Gimana cara ngatasin nervous waktu on cam?",
+      "Pertanyaan 3: Tips biar interaktif sama penonton?"
+    ];
+
+    const commentsData = [
+      ["Wah ini keren banget!", "Halo Kak Risma!", "Aku nonton dari Bandung!", "Lanjut terus ya!", "Mantap banget!"],
+      ["Kak, boleh dong collab!", "Kok bisa sih keren gini?", "Gimana cara buatnya?", "Salam dari Surabaya!", "🔥🔥🔥"],
+      ["Talkshownya seru banget!", "Suaranya jelas banget!", "Background-nya kece", "Ini live kah?", "Auto subscribe!"]
+    ];
+
+    function showComments(index) {
+      const box = document.getElementById("commentBox");
+      const comments = commentsData[index];
+      comments.forEach((text) => {
+        const div = document.createElement("div");
+        div.textContent = text;
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+      });
+    }
+
+    function playSound(index) {
+      const sounds = ["sound1", "sound2", "sound3"];
+      const audio = document.getElementById(sounds[index]);
+      audio.play();
+    }
+
+    function changeSlide(index) {
+      const text = document.getElementById("sliderText");
+      text.textContent = slides[index];
+    }
+  </script>
+</body>
+</html>
